@@ -1,0 +1,27 @@
+{
+  "name": "facerecognition",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "clarifai": "^2.8.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-particles-js": "^2.2.0",
+    "react-scripts": "1.1.4",
+    "react-tilt": "^0.1.4",
+    "tachyons": "^4.10.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0"
+  }
+}
