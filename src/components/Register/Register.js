@@ -63,7 +63,7 @@ class Register extends Component {
                 <label className='db fw6 lh-copy f6' htmlFor='name'>Name</label>
                 <input 
                   className='pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100' 
-                  type='name' 
+                  type='text' 
                   name='name' 
                   id='name'
                   onChange={this.onNameChange} />
