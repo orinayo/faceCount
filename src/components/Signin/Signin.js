@@ -2,6 +2,8 @@ import React, {
   Component
 } from 'react'
 
+import './Signin.css'
+
 class Signin extends Component {
   constructor(props) {
     super(props)
@@ -23,22 +25,48 @@ class Signin extends Component {
     })
   }
 
+  saveAuthToken = token => {
+    window.localStorage.setItem('token', token)
+  }
+
   onSubmitSignIn = () => {
-    const { signInEmail, signInPassword } = this.state
-    const { onRouteChange, loadUser } = this.props
-    fetch('https://guarded-plateau-34914.herokuapp.com/signin', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        email: signInEmail,
-        password: signInPassword
+    const {
+      signInEmail,
+      signInPassword
+    } = this.state
+    const {
+      onRouteChange,
+      loadUser
+    } = this.props
+    fetch('http://localhost:3001/signin', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: signInEmail,
+          password: signInPassword
+        })
       })
-    })
       .then(res => res.json())
-      .then(user => {
-        if (user.id) {
-          loadUser(user)
-          onRouteChange('home')
+      .then(data => {
+        if (data.userId && data.success === 'true') {
+          this.saveAuthToken(data.token)
+          fetch(`http://localhost:3001/profile/${data.userId}`, {
+              method: 'get',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': data.token
+              }
+            })
+            .then(response => response.json())
+            .then(user => {
+              if (user && user.email) {
+                loadUser(user)
+                onRouteChange('home')
+              }
+            })
+            .catch(console.log)
         }
       })
   }
@@ -54,7 +82,7 @@ class Signin extends Component {
               <div className='mt3'>
                 <label className='db fw6 lh-copy f6' htmlFor='email-address'>Email</label>
                 <input 
-                  className='pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100' 
+                  className='pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black' 
                   type='email' 
                   name='email-address' 
                   id='email-address'
@@ -63,7 +91,7 @@ class Signin extends Component {
               <div className='mv3'>
                 <label className='db fw6 lh-copy f6' htmlFor='password'>Password</label>
                 <input 
-                  className='b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100' 
+                  className='b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100 hover-black' 
                   type='password' 
                   name='password' 
                   id='password'
