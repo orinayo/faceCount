@@ -51,7 +51,7 @@ class Profile extends Component {
   }
 
   render () {
-    const { isProfileOpen, toggleModal, user } = this.props
+    const { toggleModal, user } = this.props
     const { name, age } = this.state
     return (
       <div className='profile-modal'>
