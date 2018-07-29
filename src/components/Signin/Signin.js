@@ -38,7 +38,7 @@ class Signin extends Component {
       onRouteChange,
       loadUser
     } = this.props
-    fetch('http://localhost:3001/signin', {
+    fetch('https://guarded-plateau-34914.herokuapp.com/signin', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ class Signin extends Component {
       .then(data => {
         if (data.userId && data.success === 'true') {
           this.saveAuthToken(data.token)
-          fetch(`http://localhost:3001/profile/${data.userId}`, {
+          fetch(`https://guarded-plateau-34914.herokuapp.com/profile/${data.userId}`, {
               method: 'get',
               headers: {
                 'Content-Type': 'application/json',

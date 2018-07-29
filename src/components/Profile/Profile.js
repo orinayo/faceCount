@@ -31,7 +31,7 @@ class Profile extends Component {
 
   onProfileUpdate = data => {
     const { user: { id }, toggleModal, loadUser } = this.props
-    fetch(`http://localhost:3001/profile/${id}`, {
+    fetch(`https://guarded-plateau-34914.herokuapp.com/profile/${id}`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
